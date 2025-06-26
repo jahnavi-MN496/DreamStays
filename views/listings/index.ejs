@@ -1,5 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 
+<% if (typeof isWishlistView === 'undefined') { var isWishlistView = false; } %>
+
 <style>
 :root {
   --main-bg: #181c2b;
@@ -217,61 +219,168 @@ body {
     min-height: 220px;
   }
 }
+.search-bar-container {
+  background: #23263a;
+  border-radius: 16px;
+  padding: 2rem 2rem 1.5rem 2rem;
+  margin: 2rem auto 1.5rem auto;
+  max-width: 1300px;
+  box-shadow: 0 4px 32px rgba(162,89,247,0.10);
+  border: 1.5px solid #31354a;
+}
+.search-bar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.search-bar-row {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: nowrap;
+}
+.search-bar-field {
+  flex: 1 1 160px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.search-bar-input-wrap {
+  display: flex;
+  align-items: center;
+  background: #181c2b;
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem;
+  border: 1.5px solid #31354a;
+}
+.search-bar-input-wrap input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f5f6fa;
+  font-size: 1.08rem;
+  flex: 1;
+  padding-left: 0.5rem;
+}
+.search-bar-icon {
+  color: #a259f7;
+  font-size: 1.1rem;
+}
+.search-bar-btn {
+  width: 100%;
+  background: #a259f7;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 12px rgba(162,89,247,0.10);
+  transition: background 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+.search-bar-btn:hover {
+  background: #7c3aed;
+  box-shadow: 0 4px 24px #a259f7;
+}
+@media (max-width: 1200px) {
+  .search-bar-container { max-width: 98vw; }
+  .search-bar-row { gap: 0.7rem; }
+  .search-bar-field { flex: 1 1 120px; }
+}
+@media (max-width: 900px) {
+  .search-bar-row { flex-direction: column; gap: 0.7rem; }
+  .search-bar-container { padding: 1.2rem 0.7rem 1rem 0.7rem; }
+}
+.wishlist-btn:focus { outline: none; }
 </style>
 
-<div id="filters">
-  <% const categories = [
-    { icon: "fa-fire", label: "Trending" },
-    { icon: "fa-bed", label: "Rooms" },
-    { icon: "fa-mountain-city", label: "Cities" },
-    { icon: "fa-mountain", label: "Mountains" },
-    { icon: "fa-fort-awesome", label: "Castles" },
-    { icon: "fa-person-swimming", label: "Pools" },
-    { icon: "fa-campground", label: "Camping" },
-    { icon: "fa-cow", label: "Farms" },
-    { icon: "fa-snowflake", label: "Arctic" },
-    { icon: "fa-igloo", label: "Domes" },
-    { icon: "fa-ship", label: "Boats" }
-  ]; %>
-  <% for (let cat of categories) { %>
-    <div class="filter">
-      <i class="fa-solid <%= cat.icon %>"></i>
-      <p><%= cat.label %></p>
-    </div>
-  <% } %>
-  <div class="tax-toggle">
-    <input class="form-check-input me-2" type="checkbox" id="flexSwitchCheckDefault">
-    <label class="form-check-label" for="flexSwitchCheckDefault">Price with tax</label>
-  </div>
-</div>
-
-<div class="listing-grid">
-  <% for (let listing of allListings) { %>
-    <a href="/listings/<%= listing._id %>" class="listing-link">
-      <div class="listing-card">
-        <div class="card-img-wrap">
-          <img src="<%= listing.image.url %>" class="card-img-top" alt="listing image">
-          <div class="featured-badge">Featured</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title"><%= listing.title %></div>
-          <div class="card-location"><i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %></div>
-          <div class="card-row">
-            <div class="card-rating">
-              <i class="fa-solid fa-star"></i> 4.8 <span class="card-reviews">(89)</span>
-            </div>
-            <div class="card-price">$<%= listing.price %><span>/night</span></div>
-          </div>
-          <div class="card-tags">
-            <span class="card-tag">Fireplace</span>
-            <span class="card-tag">Hot Tub</span>
-            <span class="card-tag">Ski Access</span>
-          </div>
+<div class="search-bar-container">
+  <form method="GET" action="/listings" class="search-bar-form">
+    <div class="search-bar-row">
+      <div class="search-bar-field">
+        <label>Location</label>
+        <div class="search-bar-input-wrap">
+          <i class="fa-solid fa-location-dot search-bar-icon"></i>
+          <input type="text" name="location" placeholder="Search destinations" value="<%= typeof req !== 'undefined' && req.query.location ? req.query.location : '' %>" />
         </div>
       </div>
-    </a>
-  <% } %>
+      <div class="search-bar-field">
+        <label>Min Price</label>
+        <div class="search-bar-input-wrap">
+          <i class="fa-solid fa-dollar-sign search-bar-icon"></i>
+          <input type="number" min="0" name="minPrice" placeholder="Min price" value="<%= typeof req !== 'undefined' && req.query.minPrice ? req.query.minPrice : '' %>" />
+        </div>
+      </div>
+      <div class="search-bar-field">
+        <label>Max Price</label>
+        <div class="search-bar-input-wrap">
+          <i class="fa-solid fa-dollar-sign search-bar-icon"></i>
+          <input type="number" min="0" name="maxPrice" placeholder="Max price" value="<%= typeof req !== 'undefined' && req.query.maxPrice ? req.query.maxPrice : '' %>" />
+        </div>
+      </div>
+      <div class="search-bar-field">
+        <label>Guests</label>
+        <div class="search-bar-input-wrap">
+          <i class="fa-solid fa-user-group search-bar-icon"></i>
+          <input type="number" min="1" name="guests" placeholder="Guests" value="<%= typeof req !== 'undefined' && req.query.guests ? req.query.guests : '' %>" />
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="search-bar-btn"><i class="fa-solid fa-search"></i> Search Properties</button>
+  </form>
 </div>
+
+<% if (notFound) { %>
+  <div style="text-align:center; color:#a259f7; font-size:1.5rem; margin:2rem 0;">No listings found for your search.</div>
+<% } else { %>
+  <div class="listing-grid">
+    <% for (let listing of allListings) { %>
+      <div class="listing-card-wrap" style="position:relative;">
+        <form method="POST" action="/wishlist/<%= isWishlistView ? 'remove' : 'add' %>/<%= listing._id %>" style="position:absolute;top:12px;right:12px;z-index:10;">
+          <button type="submit" class="wishlist-btn" style="background:none;border:none;cursor:pointer;outline:none;">
+            <% if (currUser && currUser.wishlist && currUser.wishlist.includes(listing._id.toString())) { %>
+              <i class="fa-solid fa-heart" style="color:#a259f7;font-size:1.4rem;"></i>
+            <% } else { %>
+              <i class="fa-regular fa-heart" style="color:#fff;font-size:1.4rem;"></i>
+            <% } %>
+          </button>
+        </form>
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+          <div class="listing-card">
+            <div class="card-img-wrap">
+              <img src="<%= listing.image.url %>" class="card-img-top" alt="listing image">
+              <div class="featured-badge">Featured</div>
+            </div>
+            <div class="card-body">
+              <div class="card-title"><%= listing.title %></div>
+              <div class="card-location"><i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %></div>
+              <div class="card-row">
+                <div class="card-rating">
+                  <i class="fa-solid fa-star"></i> 4.8 <span class="card-reviews">(89)</span>
+                </div>
+                <div class="card-price">$<%= listing.price %><span>/night</span></div>
+              </div>
+              <div style="color: #b0b3b8; font-size: 1.01rem; margin-bottom: 0.5rem;">
+                <i class="fa-solid fa-user-group"></i> <%= (listing.guests !== undefined && listing.guests !== null) ? listing.guests : 'N/A' %> guests
+              </div>
+              <div class="card-tags">
+                <span class="card-tag">Fireplace</span>
+                <span class="card-tag">Hot Tub</span>
+                <span class="card-tag">Ski Access</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% } %>
+  </div>
+<% } %>
 
 <script>
   const taxSwitch = document.getElementById("flexSwitchCheckDefault");

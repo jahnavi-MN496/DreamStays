@@ -13,6 +13,7 @@ const listingSchema = new Schema({
         filename: String,
     },
     price: Number,
+    guests: Number,
     location: String,
     country: String,
     reviews : [

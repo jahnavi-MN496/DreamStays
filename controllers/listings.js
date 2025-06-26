@@ -1,12 +1,27 @@
 const Listing = require("../models/listing.js");
 
 module.exports.index = async (req,res)=>{
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs", {allListings, hideNavbar: false, hideDarkToggle: false});
+    const { guests, minPrice, maxPrice, location } = req.query;
+    let filter = {};
+    if (guests) {
+        filter.guests = Number(guests);
+    }
+    if (minPrice || maxPrice) {
+        filter.price = {};
+        if (minPrice) filter.price.$gte = minPrice;
+        if (maxPrice) filter.price.$lte = maxPrice;
+    }
+    if (location) {
+        // Case-insensitive partial match
+        filter.location = { $regex: location, $options: 'i' };
+    }
+    const allListings = await Listing.find(filter);
+    const notFound = allListings.length === 0;
+    res.render("listings/index.ejs", {allListings, req, notFound});
 }
 
 module.exports.renderNewForm = (req,res)=>{
-    res.render("listings/new.ejs", { hideNavbar: false, hideDarkToggle: false });
+    res.render("listings/new.ejs");
 }
 
 module.exports.showListing = async (req,res)=>{
@@ -23,7 +38,7 @@ module.exports.showListing = async (req,res)=>{
         res.redirect("/listings");
     }
     console.log(listing);
-    res.render("listings/show.ejs", {listing, hideNavbar: false, hideDarkToggle: false});
+    res.render("listings/show.ejs", {listing});
 }
 
 module.exports.createListing = async(req,res,next) => {
@@ -45,7 +60,7 @@ module.exports.renderEditForm = async (req,res) => {
         req.flash("error","Listing you requested doesn't exist");
         res.redirect("/listings");
     }
-    res.render("listings/edit.ejs", {listing, hideNavbar: false, hideDarkToggle: false});
+    res.render("listings/edit.ejs", {listing});
 }
 
 module.exports.updateListing = async (req,res) =>{
