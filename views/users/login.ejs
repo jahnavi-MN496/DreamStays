@@ -1,0 +1,257 @@
+<% layout("/layouts/boilerplate", { hideNavbar: true, hideDarkToggle: true }) %>
+
+<style>
+body {
+  background: #181c2b;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login-main {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login-title {
+  color: #bbaaff;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.login-subtitle {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.login-card {
+  background: #202436;
+  border-radius: 20px;
+  box-shadow: 0 4px 32px rgba(162,89,247,0.13);
+  border: 1.5px solid #31354a;
+  padding: 2.2rem 2.5rem 2rem 2.5rem;
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.login-card h2 {
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+.login-card .desc {
+  color: #b0b3b8;
+  font-size: 0.98rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.form-label {
+  color: #e0e0e0;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+.form-control {
+  background: #23263a;
+  border: 1.5px solid #2d3148;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+  padding: 0.7rem 1rem;
+  transition: border 0.2s;
+}
+.form-control:focus {
+  border: 1.5px solid #a259f7;
+  background: #23263a;
+  color: #fff;
+  box-shadow: none;
+}
+.login-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+.login-actions label {
+  color: #b0b3b8;
+  font-size: 0.97rem;
+  font-weight: 400;
+}
+.login-actions a {
+  color: #a259f7;
+  font-size: 0.97rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.login-actions a:hover {
+  color: #7c3aed;
+}
+.login-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #a259f7 60%, #7c3aed 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  padding: 0.7rem 0;
+  margin-top: 0.7rem;
+  margin-bottom: 1.2rem;
+  transition: background 0.2s;
+}
+.login-btn:hover {
+  background: linear-gradient(90deg, #7c3aed 60%, #a259f7 100%);
+}
+.login-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #b0b3b8;
+  margin: 0.8rem 0 1rem 0;
+  font-size: 0.97rem;
+}
+.login-divider::before, .login-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #2d3148;
+  margin: 0 0.7em;
+}
+.social-btns {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.social-btn {
+  flex: 1;
+  background: #23263a;
+  color: #fff;
+  border: 1.5px solid #2d3148;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.6rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: border 0.2s, background 0.2s;
+}
+.social-btn:hover {
+  border: 1.5px solid #a259f7;
+  background: #18181c;
+}
+.login-link {
+  color: #a259f7;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 0.2rem;
+  transition: color 0.2s;
+}
+.login-link:hover {
+  color: #7c3aed;
+}
+.input-group-custom {
+  display: flex;
+  align-items: center;
+  background: #23273a;
+  border: 1.5px solid #3a3f54;
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+  padding: 0 0.8rem;
+  transition: border 0.2s, background 0.2s;
+  height: 46px;
+}
+.input-group-custom:focus-within {
+  border: 1.5px solid #a259f7;
+  background: #23273a;
+}
+.input-group-custom i {
+  color: #b0b3b8;
+  font-size: 1.15rem;
+  margin-right: 0.7rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.input-group-custom .form-control {
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  font-size: 1rem;
+  padding: 0;
+  box-shadow: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  line-height: 1.2;
+  display: block;
+}
+.input-group-custom .form-control:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+.input-group-custom .form-control::placeholder {
+  color: #b0b3b8;
+  opacity: 1;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  line-height: 1.2;
+}
+</style>
+
+<div class="login-main">
+  <div class="login-title">DreamyStays</div>
+  <div class="login-subtitle">Welcome back to your dream stays</div>
+  <div class="login-card">
+    <h2>Sign In</h2>
+    <div class="desc">Enter your credentials to access your account</div>
+    <form action="/login" method="POST" autocomplete="off">
+      <div class="mb-2">
+        <label for="username" class="form-label">Email</label>
+        <div class="input-group-custom">
+          <i class="fa-regular fa-envelope"></i>
+          <input name="username" id="username" type="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+      </div>
+      <div class="mb-2">
+        <label for="password" class="form-label">Password</label>
+        <div class="input-group-custom">
+          <i class="fa-solid fa-lock"></i>
+          <input name="password" id="password" type="password" class="form-control" placeholder="Enter your password" required>
+        </div>
+      </div>
+      <div class="login-actions mb-2">
+        <div>
+          <input type="checkbox" id="remember" style="accent-color: #a259f7;">
+          <label for="remember">Remember me</label>
+        </div>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button class="login-btn" type="submit">Sign In</button>
+    </form>
+    <div class="login-divider">Or continue with</div>
+    <div class="social-btns">
+      <button class="social-btn" type="button"><i class="fa-brands fa-google"></i> Google</button>
+      <button class="social-btn" type="button"><i class="fa-brands fa-facebook"></i> Facebook</button>
+    </div>
+    <div style="text-align:center; color:#b0b3b8; font-size:0.98rem;">
+      Don't have an account?
+      <a href="/signup" class="login-link">Sign up</a>
+    </div>
+  </div>
+</div>

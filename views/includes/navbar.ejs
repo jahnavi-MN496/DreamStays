@@ -1,0 +1,86 @@
+<style>
+.ds-navbar {
+  background: rgba(24,28,43,0.85);
+  border-bottom: 1.5px solid #23263a;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  padding: 0.7rem 0;
+  min-height: 64px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(24,28,43,0.10);
+}
+.ds-navbar .navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.ds-navbar .navbar-brand {
+  color: #a259f7 !important;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  margin-left: 0.5rem;
+  flex: 0 0 auto;
+}
+.ds-navbar .nav-center {
+  display: flex;
+  flex: 1 1 0;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+}
+.ds-navbar .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  font-size: 1.08rem;
+  transition: color 0.18s;
+  padding: 0;
+  margin: 0;
+}
+.ds-navbar .nav-link:hover, .ds-navbar .nav-link.active {
+  color: #a259f7 !important;
+}
+.ds-navbar .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: 0.5rem;
+}
+.ds-navbar .btn-signup {
+  background: linear-gradient(90deg, #a259f7 60%, #7c3aed 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.45rem 1.3rem;
+  box-shadow: 0 2px 8px rgba(162,89,247,0.10);
+  transition: background 0.18s;
+}
+.ds-navbar .btn-signup:hover {
+  background: linear-gradient(90deg, #7c3aed 60%, #a259f7 100%);
+}
+</style>
+<nav class="ds-navbar sticky-top shadow-sm">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="/listings">DreamyStays</a>
+    <div class="nav-center">
+      <a class="nav-link" href="/listings">Explore</a>
+      <% if(currUser) { %>
+        <a class="btn btn-signup" href="/listings/new" style="margin: 0 1.2rem;">+ Add New Listing</a>
+      <% } %>
+      <a class="nav-link" href="#">Become a Host</a>
+      <a class="nav-link" href="#">Profile</a>
+    </div>
+    <div class="nav-right">
+      <% if(!currUser){%>
+        <a class="nav-link" href="/login">Sign In</a>
+        <a class="btn btn-signup" href="/signup">Sign Up</a>
+      <%}%>
+      <% if(currUser) { %>
+        <a class="nav-link" href="/logout">Log Out</a>
+      <%}%>
+    </div>
+  </div>
+</nav>

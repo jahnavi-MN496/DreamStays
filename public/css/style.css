@@ -1,0 +1,188 @@
+body {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif !important;
+    background-color: #181c2b;
+    color: #f8f9fa;
+    min-height: 100vh;
+}
+.lux-dark {
+    background-color: #181c2b !important;
+    color: #f8f9fa !important;
+}
+.lux-gold {
+    color: #d4af37 !important;
+}
+.lux-bg-gold {
+    background-color: #d4af37 !important;
+}
+.lux-bg-navy {
+    background-color: #181c2b !important;
+}
+.lux-border-gold {
+    border-color: #d4af37 !important;
+}
+
+/* Navbar */
+.navbar {
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(24,28,43,0.05);
+}
+.navbar-brand {
+    letter-spacing: 2px;
+}
+
+/* Listing Cards */
+.card.listing-card {
+    border: 1px solid #222;
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 24px rgba(24,28,43,0.08);
+    background: #23284a;
+    color: #f8f9fa;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card.listing-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 8px 32px rgba(212,175,55,0.15);
+    border-color: #d4af37;
+}
+.card-img-top {
+    border-radius: 1.25rem 1.25rem 0 0 !important;
+    object-fit: cover;
+    height: 220px;
+}
+.card-title {
+    font-family: 'Montserrat', serif;
+    font-weight: 700;
+    color: #d4af37;
+}
+.card-text {
+    color: #e0e0e0;
+}
+
+/* Buttons */
+.btn.lux-bg-gold {
+    background-color: #d4af37 !important;
+    color: #181c2b !important;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background 0.2s, color 0.2s;
+}
+.btn.lux-bg-gold:hover, .btn.lux-bg-gold:focus {
+    background-color: #bfa133 !important;
+    color: #fff !important;
+}
+.btn-outline-light {
+    border-radius: 2rem;
+}
+
+/* Forms */
+.form-control, .form-select {
+    border-radius: 2rem;
+    background: #23284a;
+    color: #f8f9fa;
+    border: 1px solid #d4af37;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 0 0.2rem rgba(212,175,55,0.15);
+    background: #23284a;
+    color: #fff;
+}
+
+/* Footer */
+.f-info {
+    background: #23284a;
+    color: #d4af37;
+    padding: 2rem 0 1rem 0;
+    text-align: center;
+    border-top: 1px solid #d4af37;
+}
+.f-info-links a {
+    color: #d4af37;
+    text-decoration: none;
+    margin: 0 1rem;
+}
+.f-info-links a:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+.f-info-socials i {
+    color: #d4af37;
+    margin: 0 0.5rem;
+    font-size: 1.3rem;
+}
+
+/* Utility */
+.rounded-pill {
+    border-radius: 2rem !important;
+}
+.shadow-sm {
+    box-shadow: 0 2px 8px rgba(24,28,43,0.08) !important;
+}
+
+/* Dark mode toggle button */
+#darkModeToggle {
+    border-radius: 2rem;
+    font-weight: 600;
+    background: rgba(24,28,43,0.8);
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    transition: background 0.2s, color 0.2s;
+}
+#darkModeToggle:hover {
+    background: #d4af37;
+    color: #181c2b;
+}
+
+/* Flash Message Centering */
+.flash-center-container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100px;
+  z-index: 2000;
+  pointer-events: none;
+  width: auto;
+  max-width: 98vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 1rem;
+}
+.flash-center-container .alert {
+  min-width: 320px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 4px 24px rgba(162,89,247,0.13);
+  border-radius: 1rem;
+  font-size: 1.08rem;
+  text-align: center;
+  pointer-events: auto;
+  opacity: 0.97;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  .flash-center-container {
+    top: 76px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .flash-center-container .alert {
+    min-width: 0;
+    max-width: 98vw;
+  }
+}
+.flash-center-container .alert-success {
+  background: linear-gradient(90deg, #23284a 60%, #2e2f5b 100%);
+  color: #bbaaff;
+  border: 1.5px solid #a259f7;
+}
+.flash-center-container .alert-danger {
+  background: linear-gradient(90deg, #3a2230 60%, #5b2e3a 100%);
+  color: #ffb3c6;
+  border: 1.5px solid #ffb3c6;
+}
+.flash-center-container .btn-close {
+  filter: invert(1) grayscale(1);
+  opacity: 0.7;
+}
