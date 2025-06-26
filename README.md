@@ -4,7 +4,7 @@ A full-stack Airbnb-like web application for listing, searching, and wishlisting
 
 ---
 
-## 🚀 Features
+## Features
 - User authentication (signup, login, logout)
 - Add, edit, and delete property listings
 - Search and filter listings by location, price, and number of guests
@@ -22,7 +22,7 @@ A full-stack Airbnb-like web application for listing, searching, and wishlisting
 
 ---
 
-## ⚙️ Setup & Installation
+## Setup & Installation
 
 1. **Clone the repository:**
    ```bash
@@ -50,7 +50,7 @@ A full-stack Airbnb-like web application for listing, searching, and wishlisting
 
 ---
 
-## 📚 API Endpoints & Functions
+##  API Endpoints & Functions
 
 ### **Authentication**
 - `GET /signup` — Render signup form
@@ -79,10 +79,8 @@ A full-stack Airbnb-like web application for listing, searching, and wishlisting
 
 ---
 
-## 📝 Contribution
+##  Contribution
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
 ---
 
-## 📄 License
-This project is open source and available under the [MIT License](LICENSE). 
