@@ -1,12 +1,12 @@
 # DreamStays
 
-A full-stack Airbnb-like web application for listing, searching, and wishlisting rental properties.
+DreamStays is a modern web application for discovering, listing, searching, and wishlisting unique rental properties. 
 
 ---
 
-## 🚀 Features
+##  Features
 - User authentication (signup, login, logout)
-- Add, edit, and delete property listings
+- Add, edit, and delete your own property listings
 - Search and filter listings by location, price, and number of guests
 - Wishlist: add/remove listings to your personal wishlist
 - View your wishlist from the navbar
@@ -15,14 +15,14 @@ A full-stack Airbnb-like web application for listing, searching, and wishlisting
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 - **Backend:** Node.js, Express.js, MongoDB, Mongoose
 - **Frontend:** EJS, CSS, Bootstrap, FontAwesome
 - **Authentication:** Passport.js
 
 ---
 
-## ⚙️ Setup & Installation
+##  Setup & Installation
 
 1. **Clone the repository:**
    ```bash
@@ -46,11 +46,11 @@ A full-stack Airbnb-like web application for listing, searching, and wishlisting
    node app.js
    ```
 6. **Visit in your browser:**
-   - Go to [http://localhost:3000/listings](http://localhost:3000/listings)
+   - Go to [http://localhost:8080/listings](http://localhost:8080/listings)
 
 ---
 
-## 📚 API Endpoints & Functions
+##  API Endpoints & Functions
 
 ### **Authentication**
 - `GET /signup` — Render signup form
@@ -79,10 +79,8 @@ A full-stack Airbnb-like web application for listing, searching, and wishlisting
 
 ---
 
-## 📝 Contribution
+##  Contribution
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
 ---
 
-## 📄 License
-This project is open source and available under the [MIT License](LICENSE). 
