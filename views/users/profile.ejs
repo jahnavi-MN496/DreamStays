@@ -1,0 +1,50 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container py-4">
+  <div class="profile-header" style="text-align:center; margin-bottom:2rem;">
+    <h2 style="color:#a259f7; font-weight:700;">Profile</h2>
+    <div style="color:#bbaaff; font-size:1.2rem; margin-top:0.5rem;">Email: <%= user.email %></div>
+  </div>
+  <div>
+    <h3 style="color:#a259f7; font-size:1.3rem; font-weight:600; margin-bottom:1.2rem;">Your Listings</h3>
+    <% if(listings.length === 0) { %>
+      <div style="color:#b0b3b8; font-size:1.1rem;">You have not created any listings yet.</div>
+    <% } else { %>
+      <div class="listing-grid">
+        <% listings.forEach(listing => { %>
+          <div class="listing-card-wrap" style="position:relative;">
+            <div style="position:absolute;top:12px;right:12px;z-index:10;">
+              <i class="fa-solid fa-heart" style="color:#a259f7;font-size:1.4rem;"></i>
+            </div>
+            <a href="/listings/<%= listing._id %>" class="listing-link">
+              <div class="listing-card" style="box-shadow: 0 0 0 3px #a259f7, 0 4px 24px rgba(162,89,247,0.10); border: 2px solid #a259f7;">
+                <div class="card-img-wrap">
+                  <img src="<%= listing.image.url %>" class="card-img-top" alt="listing image">
+                  <div class="featured-badge" style="background:#a259f7;color:#fff;">Featured</div>
+                </div>
+                <div class="card-body">
+                  <div class="card-title" style="font-family:'Montserrat',serif;font-weight:700;color:#fff;"> <%= listing.title %></div>
+                  <div class="card-location"><i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %></div>
+                  <div class="card-row">
+                    <div class="card-rating">
+                      <i class="fa-solid fa-star"></i> 4.8 <span class="card-reviews">(89)</span>
+                    </div>
+                    <div class="card-price">$<%= listing.price %><span>/night</span></div>
+                  </div>
+                  <div style="color: #b0b3b8; font-size: 1.01rem; margin-bottom: 0.5rem;">
+                    <i class="fa-solid fa-user-group"></i> <%= (listing.guests !== undefined && listing.guests !== null) ? listing.guests : 'N/A' %> guests
+                  </div>
+                  <div class="card-tags">
+                    <span class="card-tag">Fireplace</span>
+                    <span class="card-tag">Hot Tub</span>
+                    <span class="card-tag">Ski Access</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</div> 

@@ -298,10 +298,49 @@ body {
   .search-bar-container { padding: 1.2rem 0.7rem 1rem 0.7rem; }
 }
 .wishlist-btn:focus { outline: none; }
+@media (max-width: 700px) {
+  .search-bar-container {
+    padding: 0.5rem 0.2rem;
+    margin: 0.7rem auto 0.7rem auto;
+    border-radius: 10px;
+  }
+  .search-bar-form {
+    display: none;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 0.7rem;
+    animation: flashFadeIn 0.3s;
+  }
+  .search-bar-form.show {
+    display: flex;
+  }
+  .search-toggle {
+    display: block;
+    width: 100%;
+    background: #a259f7;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 12px rgba(162,89,247,0.10);
+    cursor: pointer;
+    text-align: center;
+  }
+}
+@media (min-width: 701px) {
+  .search-toggle { display: none; }
+  .search-bar-form { display: flex !important; }
+}
 </style>
 
 <div class="search-bar-container">
-  <form method="GET" action="/listings" class="search-bar-form">
+  <button class="search-toggle" id="searchToggleBtn">
+    <i class="fa-solid fa-search"></i> Search Properties
+  </button>
+  <form method="GET" action="/listings" class="search-bar-form" id="searchBarForm">
     <div class="search-bar-row">
       <div class="search-bar-field">
         <label>Location</label>
@@ -389,4 +428,15 @@ body {
       info.style.display = taxSwitch.checked ? "inline" : "none";
     });
   });
+</script>
+
+<script>
+const searchToggle = document.getElementById('searchToggleBtn');
+const searchForm = document.getElementById('searchBarForm');
+if(searchToggle && searchForm) {
+  searchToggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    searchForm.classList.toggle('show');
+  });
+}
 </script>

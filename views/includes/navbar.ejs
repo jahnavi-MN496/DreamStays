@@ -61,18 +61,60 @@
 .ds-navbar .btn-signup:hover {
   background: linear-gradient(90deg, #7c3aed 60%, #a259f7 100%);
 }
+@media (max-width: 800px) {
+  .ds-navbar .navbar-inner {
+    flex-direction: row;
+    align-items: center;
+  }
+  .ds-navbar .nav-center,
+  .ds-navbar .nav-right {
+    display: none;
+  }
+  .ds-navbar .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: #a259f7;
+    font-size: 2rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    z-index: 3000;
+  }
+  .ds-navbar .mobile-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100vw;
+    background: #23263a;
+    box-shadow: 0 4px 24px rgba(24,28,43,0.13);
+    z-index: 2500;
+    padding: 1.2rem 0.5rem;
+    gap: 1.2rem;
+    animation: flashFadeIn 0.3s;
+  }
+  .ds-navbar .mobile-menu.show {
+    display: flex;
+  }
+}
+@media (min-width: 801px) {
+  .ds-navbar .menu-toggle { display: none; }
+  .ds-navbar .mobile-menu { display: none !important; }
+}
 </style>
 <nav class="ds-navbar sticky-top shadow-sm">
   <div class="navbar-inner">
     <a class="navbar-brand" href="/listings">DreamyStays</a>
+    <button class="menu-toggle" aria-label="Open menu" id="menuToggleBtn">
+      <i class="fa fa-bars"></i>
+    </button>
     <div class="nav-center">
       <a class="nav-link" href="/listings">Explore</a>
       <% if(currUser) { %>
         <a class="nav-link" href="/wishlist">Wishlist</a>
         <a class="btn btn-signup" href="/listings/new" style="margin: 0 1.2rem;">+ Add New Listing</a>
       <% } %>
-      <a class="nav-link" href="#">Become a Host</a>
-      <a class="nav-link" href="#">Profile</a>
     </div>
     <div class="nav-right">
       <% if(!currUser){%>
@@ -84,4 +126,37 @@
       <%}%>
     </div>
   </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a class="nav-link" href="/listings">Explore</a>
+    <% if(currUser) { %>
+      <a class="nav-link" href="/wishlist">Wishlist</a>
+      <a class="btn btn-signup" href="/listings/new" style="margin: 0 1.2rem;">+ Add New Listing</a>
+      <a class="nav-link" href="/logout">Log Out</a>
+    <% } else { %>
+      <a class="nav-link" href="/login">Sign In</a>
+      <a class="btn btn-signup" href="/signup">Sign Up</a>
+    <% } %>
+  </div>
 </nav>
+<script>
+const menuBtn = document.getElementById('menuToggleBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+if(menuBtn && mobileMenu) {
+  menuBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    mobileMenu.classList.toggle('show');
+  });
+  // Close menu when clicking a link
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('show');
+    });
+  });
+  // Close menu when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+      mobileMenu.classList.remove('show');
+    }
+  });
+}
+</script>
