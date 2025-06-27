@@ -4,11 +4,9 @@ DreamStays is a modern web application for discovering, listing, searching, and 
 
 ---
 
-<<<<<<< HEAD
-##  Features
-=======
+
 ## Features
->>>>>>> 17c6485f163f6cdf34207254fd4e39dfe598f031
+
 - User authentication (signup, login, logout)
 - Add, edit, and delete your own property listings
 - Search and filter listings by location, price, and number of guests
@@ -26,11 +24,9 @@ DreamStays is a modern web application for discovering, listing, searching, and 
 
 ---
 
-<<<<<<< HEAD
-##  Setup & Installation
-=======
+
 ## Setup & Installation
->>>>>>> 17c6485f163f6cdf34207254fd4e39dfe598f031
+
 
 1. **Clone the repository:**
    ```bash
@@ -90,5 +86,5 @@ DreamStays is a modern web application for discovering, listing, searching, and 
 ##  Contribution
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
----
+
 
